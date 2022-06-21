@@ -16,6 +16,8 @@ recognition.onresult = (event) => {
     const canvas = document.querySelector('#canvas');
     canvas.style.backgroundColor = transcript;
     // check if the voice input has ended
+    const button = document.querySelector('#speech');
+    button.disabled = false;
     if(event.results[0].isFinal) {
         return event.results[0];
     }
@@ -27,6 +29,8 @@ recognition.onerror = (error) => {
     console.log("An error has occured. Check if microphone use is allowed" + 
     "on this website. Otherwise try a different microphone or Chrome / Firefox. ")
     console.log(error);
+    const button = document.querySelector('#speech');
+    button.disabled = false;
 }
 addSpeechRecognition();
 
@@ -45,5 +49,7 @@ function getColor() {
     catch {
         console.log("Recognition couldn't start. Wait for recognition to end before starting another one or switch browsers.")
     }
+    const button = document.querySelector('#speech');
+    button.disabled = true;
     return;
 }
