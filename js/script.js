@@ -12,7 +12,7 @@ recognition.lang = 'en-US';
 recognition.maxAlternatives = 1;
 recognition.onresult = (event) => {
     const transcript = event.results[0][0].transcript;
-    console.log(transcript);
+    console.log("You said: " + transcript);
     const canvas = document.querySelector('#canvas');
     canvas.style.backgroundColor = transcript;
     // check if the voice input has ended
@@ -22,10 +22,11 @@ recognition.onresult = (event) => {
     }
 };
 recognition.onnomatch = (event) => {
-    console.log("lok");
-    console.log(event);
+    console.log("No match, you said: "+ event);
 };
 recognition.onerror = (error) => {
+    console.log("An error has occured. Check if microphone use is allowed" + 
+    "on this website. Otherwise try a different microphone or Chrome / Firefox. ")
     console.log(error);
 }
 addSpeechRecognition();
@@ -34,17 +35,11 @@ function addSpeechRecognition() {
     const button = document.querySelector('#speech');
 
     button.addEventListener('click', () => {
-        let color = getColor();
-        if(!color) {
-            return;
-        }
-        const canvas = document.querySelector('#canvas');
-        canvas.style.backgroundColor = color;
+        getColor();
     });
 }
 
 function getColor() {
     recognition.start();    
-
-    return undefined;
+    return;
 }
