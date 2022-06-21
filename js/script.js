@@ -17,7 +17,6 @@ recognition.onresult = (event) => {
     canvas.style.backgroundColor = transcript;
     // check if the voice input has ended
     if(event.results[0].isFinal) {
-        console.log(transcript);
         return event.results[0];
     }
 };
@@ -40,6 +39,11 @@ function addSpeechRecognition() {
 }
 
 function getColor() {
-    recognition.start();    
+    try {
+        recognition.start();
+    }
+    catch {
+        console.log("Recognition couldn't start. Wait for recognition to end before starting another one or switch browsers.")
+    }
     return;
 }
